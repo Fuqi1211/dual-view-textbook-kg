@@ -1,0 +1,55 @@
+任务：根据 source_evidence 和已经解析身份的 allowed_nodes，抽取关系，并与 existing_claims 比较，提出对当前图谱的局部更新。概念身份已由上游处理，不在这里按名字重新合并节点。目标是形成可提交的知识更新；需要补充信息时，指出具体下一步，由调用方补读、补抽或消歧后继续，不以另存未决项结束工作。
+
+一、覆盖与证据
+逐段处理 source_evidence 中涉及的知识。教材 → Gt 补充概念、关系、定义细节和条件；Gt → 教材核查当前片段涉及的既有断言。只输出变更和待处理事项，不重复输出未变化的图谱。
+新增知识必须有 source_evidence 的支持。reference_evidence 仅用于核对已有来源和解释冲突，不能冒充当前教材新增的证据。引用必须指向输入中有原文文本的证据 ID。
+片段未覆盖的旧断言不要求逐条输出，不因未覆盖而停用。检索未返回某断言也不证明全图没有该断言；提交环节会检查重复。
+
+二、关系判断
+- 端点只能来自 allowed_nodes，且 identity_status=resolved。规范 ID 和调用方分配的临时 ID 都必须逐字引用；缺少端点时输出 missing_endpoint。
+- 检查“头—谓词—尾”完整断言、方向和条件。共现、相邻、相似、先讲后讲不构成关系证据。
+- 严格按 schema 使用 12 类关系。is_a 是子类到一般类别，instance_of 是实例到类别；只有输入明确 node_kind=instance 的端点可作实例。
+- part_of 是部分到整体，consists_of 是整体到部分，同一事实只选一个方向；compared_with 每对只输出一条。
+- prerequisite_of 需要原文支持必要依赖，不能由教学顺序推出。causes 需要明确因果；一般影响用 affects。
+- used_for 的尾节点是任务或功能，implemented_by 是抽象对象到实现，derived_from 是结果到依据，evaluated_by 的尾节点必须符合 Metric。
+- 正向边仅表达被支持的正向断言。否定证据可以用于推翻既有正向断言；否定、可能性或模式无法表达的事实，先判断是否可以作为有证据的概念属性或条件保存。仍需要进一步判断时输出 follow_up，不强套关系。
+
+三、更新操作
+add_node：仅引入 allowed_nodes 中 lifecycle=provisional 的节点；payload={}，保留该输入节点的原文定义、范围和各自证据。每个临时节点必须有 add_node 或 follow_up 说明，不能默默丢弃。程序在提交时分配全局 ID。
+add_claim：向已存在或同组新增节点补入事实。payload={"claim":CLAIM}。已有同义且条件一致的断言应 attach_evidence；不同条件下成立的知识可以分别记录。
+attach_evidence：target_id 为既有 claim_id，payload={}。新增证据必须支持该断言完整含义及条件。只提到概念名或只支持定义的一部分时，不得给完整定义追加“已支持”标记。
+revise_claim：target_id 为既有 claim_id，payload={"before":原content,"after":修订CLAIM}。只修改证据支持的错误或缺失部分；before 逐字复制输入结构，便于版本检查。修订关系方向、端点或条件也使用这一原子替换，保留历史。
+retire_claim：target_id 为既有 claim_id，payload={}。仅对明确被推翻且无合适直接修订的断言提出停用，reason 说明矛盾。不得借此删除整个有效概念节点或历史。
+
+CLAIM 的两种结构：
+节点事实：{"kind":"node_fact","node_id":"允许的节点ID","field":"definition_detail","value":"原文支持的内容","conditions":""}
+field 可为 definition、definition_detail、alias、scope、entity_type。定义字段附 definition_status=explicit、summarized 或 partial。新增部分特征用 definition_detail，不能以局部定义覆盖已有完整定义；有证据且语义相容的补充才可以修订为更完整表述。
+关系事实：{"kind":"relation","head":"允许的节点ID","relation":"schema内关系","tail":"允许的节点ID","conditions":""}
+
+四、何时修订或停用
+先确认同一所指、同一断言和可比较的条件，再检查明确矛盾。没有提到、没有检索到、定义较简略、条件不同都不能作为错误依据。
+仅有参数先验的错误断言，可以根据明确教材证据提出修订或停用。已有教材支持的断言，需同时阅读 reference_evidence 中双方实际原文，核对范围和条件；旧证据未提供或冲突无法解释时输出 source_conflict，不默认新来源正确。
+若发现一个节点混合不同含义，输出 identity_split_required，并指出涉及断言，交身份处理阶段；本阶段不自造分裂 ID。
+
+五、输出
+{
+  "request_id":"原输入 request_id",
+  "base_graph_version":"原输入 graph_version",
+  "changes":[
+    {"proposal_id":"p1","group_id":"u1","operation":"add_claim","target_id":null,"payload":{"claim":{"kind":"relation","head":"规范或临时ID","relation":"is_a","tail":"另一允许ID","conditions":""}},"evidence_ids":["source_evidence ID"],"compared_evidence_ids":[],"reason":"简短说明新增或修订依据"}
+  ],
+  "follow_up":[
+    {"kind":"missing_endpoint","related_ids":[],"statement":"需要完成的具体知识更新","evidence_ids":["source_evidence ID"],"next_step":"补抽原文明确提到的缺失概念，再建立关系"}
+  ],
+  "coverage":{"output_limit_reached":false,"remaining_evidence_ids":[]}
+}
+operation 仅使用上述五项。add_node 的 target_id 是输入临时节点ID；add_claim 的 target_id=null；其余操作 target_id 是输入 claim_id。
+group_id 将必须一起生效的操作分组。例如新节点及其新关系必须同组，提交失败时不能只留下半条更新。每个 proposal_id 在本次唯一。
+同一连通更新涉及多个新节点时，这些 add_node 与依赖它们的 add_claim 使用相同 group_id；可将本片段全部变化统一为一个原子组，避免共享新端点跨组。
+follow_up.kind 可为 missing_endpoint、schema_gap、source_conflict、identity_unresolved、identity_split_required、insufficient_evidence、negative_or_uncertain、node_not_admitted。next_step 必须说明需要补读、补抽、修订或转换为何种知识表示，不只写“待人工处理”。确属实例或局部符号、无需进入概念层的内容，在确认后结束相应分支，不反复抽取。
+evidence_ids 只取 source_evidence；compared_evidence_ids 只取 reference_evidence 的实际原文。正文范围不足时留待核查，不编造对照证据。
+没有新增时允许 changes=[]；得到新证据但事实不变时可仅输出 attach_evidence。输出容量不足时不要截断一个原子组，将未处理证据列入 remaining_evidence_ids。实际提交、去重、版本冲突和人工验收由调用方管理。
+若 completion_instruction 已包含补读后的复核结论，优先解决它指出的事项。确实不覆盖、证据不足或互斥来源无法消除的分歧，不强行生成确定关系，也不反复要求相同上下文；对应结论及原文由调用方保留在本块复核记录。能由具体范围或条件区分的知识，分别形成带条件的断言；不要用课程名称代替真实语义条件。端点缺失、节点混义等仍影响正确建图的问题，继续给出具体 follow_up。
+
+TASK_INPUT_JSON:
+{TASK_INPUT_JSON}

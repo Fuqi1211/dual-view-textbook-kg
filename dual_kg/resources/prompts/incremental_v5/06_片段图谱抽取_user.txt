@@ -1,0 +1,34 @@
+任务：阅读教材片段，按 Schema 一次提取核心概念和关系，并补充相关已有图谱。最多 30 个实体、60 条关系；定义用一句话，不展开教材例子和逐步微操作。
+
+# Schema Definition
+SCHEMA_JSON:
+{SCHEMA_JSON}
+
+## 实体
+每个实体包含 query_id（如 q1）、name、entity_type、aliases、definition、definition_status、scope、evidence_ids、definition_evidence_ids。
+entity_type 按 entity_types 的定义选择。definition_status 为 explicit（直接定义）、summarized（原文归纳）、partial（部分说明）或 not_provided（无定义）。无定义时 definition=null、definition_evidence_ids=[]。别名未给出时为 []；scope 只填区分同名含义的必要限定，无则为 ""，不填书名或章节名。
+本图提取概念层的知识对象，示例变量、文件名和具体实例不建点。
+
+## 关系
+每条关系包含 head、relation、tail、conditions、evidence_ids。端点使用本次 query_id 或 local_graph 中的实体 ID，relation 按 relation_types 的含义和方向选择。
+本轮没有实例节点，不抽 instance_of。
+
+# 要求
+- 提取 primary 正文明确呈现、有专业含义的知识对象及其关系。上下文用于理解术语，已有图谱帮助采用一致的名称、类型和范围。
+- 定义、别名、范围和关系以原文为依据，不臆造内容。保留成立条件；共现和教材顺序不能单独证明关系。
+- evidence_ids 只能引用本次 source_evidence 中的 ID。定义证据是实体提及证据的子集；每条关系必须有支持整个断言的原文证据。
+- 若原文明显纠正已有断言，在 revisions 中给出该 claim_id、operation、before、after、evidence_ids 和 reason；before 复制原断言。operation 为 revise_claim 或 retire_claim，停用时 after=null。reference_evidence 用于比较旧来源，教材未提及旧知识时保留它。
+
+# 输出格式
+request_id 和 graph_version 原样复制输入，graph_version 保持整数。说明用中文，保留专名和符号。没有内容的数组返回 []。
+{
+  "request_id":"输入值",
+  "graph_version":0,
+  "concepts":[{"query_id":"q1","name":"概念名","entity_type":"Concept","aliases":[],"definition":null,"definition_status":"not_provided","scope":"","evidence_ids":["e1"],"definition_evidence_ids":[]}],
+  "relations":[{"head":"q1","relation":"part_of","tail":"q2","conditions":"","evidence_ids":["e1"]}],
+  "revisions":[]
+}
+
+# Input Text
+TASK_INPUT_JSON:
+{TASK_INPUT_JSON}

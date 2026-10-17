@@ -1,0 +1,25 @@
+entity_types:
+  Concept: General domain concept, term, or theoretical notion.
+  Method: A named method or problem-solving approach.
+  Principle: A principle, rule, law, or guiding statement.
+  Formula: A mathematical formula, equation, or expression.
+  Algorithm: A named algorithm or stepwise computational procedure.
+  Structure: A data structure, model structure, or organized composition.
+  Process: A process, workflow, or sequence of operations.
+  Metric: A measurement index, indicator, or evaluation criterion.
+  Tool: A software tool, instrument, or practical artifact.
+  Phenomenon: An observed effect, pattern, or phenomenon.
+
+relation_types:
+  is_a: Head is a subtype/category member of tail; direction is specific concept -> broader type. Use only when the text states classification such as "属于/是一种/可分为某类".
+  part_of: Head is a component/member/part of tail; direction is component -> whole. Do not use for loose association, usage, comparison, or causal influence.
+  prerequisite_of: Head is explicitly required before tail, or must be understood before tail; direction is prerequisite -> dependent concept. Use only when the text states a prerequisite/dependency.
+  causes: Head explicitly causes or leads to tail; direction is cause -> result. Use only for clear causal language, not ordinary influence.
+  affects: Head explicitly influences, changes, limits, or impacts tail; direction is influencing factor -> affected object. Use when causality is weaker than causes.
+  used_for: Head is a tool/method/mechanism used to achieve tail; direction is means -> purpose/task. Tail should be a task, function, or goal, not just a nearby concept.
+  consists_of: Head explicitly consists of/includes/contains tail; direction is whole -> component. Do not output both consists_of and part_of for the same fact.
+  compared_with: Head is explicitly compared/contrasted with tail. Use one edge only, following the text order when possible.
+  instance_of: Head is a concrete example/instance/member of tail; direction is example -> class. Do not use for subtype hierarchy when is_a is more appropriate.
+  evaluated_by: Head is explicitly evaluated/measured by tail; direction is evaluated object -> metric/criterion. Tail should be a metric, criterion, or measurement.
+  implemented_by: Head is an abstract function/method/process implemented by tail; direction is abstract target -> concrete implementation/mechanism.
+  derived_from: Head is explicitly derived/calculated/obtained from tail; direction is derived result -> source basis.

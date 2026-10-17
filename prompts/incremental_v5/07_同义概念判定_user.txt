@@ -1,0 +1,11 @@
+根据名称、定义、类型、适用范围和教材原文判断每个候选对。
+merge：同义概念，名称可以不同。
+separate：含义不同，包括同名异义、上下位概念和相关但不等同的概念。
+unresolved：现有内容无法确定。
+来源包含书名、章节及证据；用于判断学科语境，书籍或章节不同本身不代表概念不同；名称相同或相似度高本身不代表同义。
+对同名异义，给出基于定义和来源的简短含义限定词，如“数据结构”“进程内存”，分别放入 left_qualifier / right_qualifier；无法明确含义时留空。
+每个判定的 evidence_ids 只能取自该对左右节点的 evidence 列表，不能引用其他候选对的证据 ID，无原文证据时 evidence_ids 为 []。
+输出 decisions 对象，以输入的 pair_id 为键，每个候选恰好一个判定：
+{"decisions":{"输入的 pair_id":{"decision":"merge|separate|unresolved","reason":"简短依据","evidence_ids":[],"left_qualifier":"","right_qualifier":""}}}
+候选对：
+{TASK_INPUT_JSON}

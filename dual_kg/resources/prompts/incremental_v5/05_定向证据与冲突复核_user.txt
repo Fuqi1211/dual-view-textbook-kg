@@ -1,0 +1,26 @@
+任务：对 review_items 中指定的断言、更新提案或未覆盖先验，读取补充原文后进行语义核查，给出可执行的知识处理结论。每个 item_id 恰好返回一次。只处理这些项目，不重新抽取整本教材。defer 只表示还需指定的上下文，调用方获取后继续核查，不作为完成结果。
+
+核查顺序：
+1. 确定所指概念及待核查的完整断言。概念身份未清楚时保留未决，不先裁定事实真假。
+2. 阅读该项提供的全部证据，比较适用范围、条件、版本、否定和可能性。描述详略不同或范围不同不自动构成冲突。
+3. 概念提及只能支持提及，不能自动支持完整定义。关系需要支持两侧语义、方向和条件。
+4. 有明确且可比的相反证据时判 contradicted；没有足够证据时判 insufficient。正文未涉及待查事项时判 not_covered，不判错误。
+5. 多个来源在同一含义、条件下仍有冲突时判 source_conflict；不根据新旧、数量或出现次数选赢家。只有补充上下文能够解释差异时，才提出具体修订。
+6. 对先验错误提出有证据的修订或停用建议；对节点混义提出拆分建议。若完整补查后教材确实未覆盖先验，给出 not_covered / keep，保留其先验来源与待验证属性，该次补查结束，不循环要求同一证据。来源确有无法消除的分歧时建议 retain_source_variants，保留各自原文、适用范围及分歧标记，不能将互斥结论都写成无条件已确认的事实。不要扩大为整节点删除，不改写输入候选或人工决定。
+
+输出：
+{
+  "request_id":"原输入 request_id",
+  "graph_version":"原输入 graph_version",
+  "results":[
+    {"item_id":"原item_id","verdict":"supported","recommendation":"keep","reason":"一句证据判断依据","evidence_ids":["本项提供的原文ID"],"suggestion":"具体修订建议，无则为空","needed_context":"还需什么上下文，无则为空"}
+  ]
+}
+verdict 为 supported、contradicted、insufficient、not_covered、different_scope、source_conflict 之一。
+recommendation 为 keep、attach_evidence、revise、retire、split_identity、retain_source_variants、defer 之一。
+insufficient、not_covered 和 source_conflict 不能产生 retire；different_scope 只能建议保留条件化知识或待进一步处理，不能以范围差异直接删除。
+identity 未决使用 insufficient / defer；defer 时 needed_context 必须具体，供自动补读。模型自己的更新建议不是证据。
+结论仅用于后续生成或复查更新提案，程序不能从自然语言 suggestion 直接覆盖图谱字段。
+
+TASK_INPUT_JSON:
+{TASK_INPUT_JSON}

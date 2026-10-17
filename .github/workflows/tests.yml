@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install package and optional PDF dependencies
+        run: python -m pip install ".[legacy-pdf]"
+      - name: Public interface tests
+        run: python -m unittest discover -s tests
+      - name: Concept engine regression tests
+        run: python -m unittest discover -s upstream_tests
+      - name: Structure graph boundary tests
+        run: python -m unittest discover -s legacy_text_graph_tools -p test_v6_cross_page.py
+      - name: Run both graph interfaces offline
+        run: python -m dual_kg demo --output ./demo_output
+      - name: Export intermediate processing records
+        run: python -m dual_kg process-export --output ./demo_output/concepts --destination ./demo_process

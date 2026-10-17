@@ -1,0 +1,389 @@
+{
+  "algorithm_version": "incremental-v5-with-structure-v6-adapter",
+  "files": [
+    {
+      "path": "config/incremental.example.yaml",
+      "sha256": "cbd055868292c261396e4c79d170e3e098c2feef7469739d5adbf645aa94d059"
+    },
+    {
+      "path": "config/schema.yaml",
+      "sha256": "c785d699bcea42f98ebb7193bf4821e54aa79a268fb298dd3ff2a40d1956c82c"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/__init__.py",
+      "sha256": "1967f5c9215e7d145dc595838f5b750db9477937cf5a53cca52eb435b396496c"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/engine.py",
+      "sha256": "0ffe345ab891ce76a32675ed9723cfed7c7494af9e0231699187f4382d195988"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/exports.py",
+      "sha256": "4568b896142b7b17c5dd1add3567b41cd05692655195b22131e86943a065371e"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/legacy_import.py",
+      "sha256": "5d605458c7f57d954b95941a0a68752b0aeb2e3175eb0bd7d5195c7120a93179"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/runtime.py",
+      "sha256": "8838e26f08021927e46cc49091beec4cec24a61d8d260a08661b18d0ad7c739a"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_build/source_adapter.py",
+      "sha256": "a2166b0a348d8da22bc098ed29998267de4ebeaf3348efee16424b5231387c26"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/__init__.py",
+      "sha256": "02214cf4c4694ad50cda37777a13bc54252b964c6bd877c8ffb7343c386c7339"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/engine.py",
+      "sha256": "952b6c7424926448daf73e826cb1c3cf65d059c3b7daefefefef0c4313cdfbe7"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/graph_merge.py",
+      "sha256": "6bed6409618a3aced25db4e347003346db83fc4324c2d70cc1bb79a48c4c70b5"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/neo4j_store.py",
+      "sha256": "7f317f6a6e8b47b91346aad4a38aceead91463a4a3c518bdf3d35abaaa89fc2b"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/runtime.py",
+      "sha256": "daa06469da55484e653998344decafb1fdf5316119213c317c8abac3df58064b"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/semantic_merge.py",
+      "sha256": "47ee8e5751155f1bae9c26d7906522f32c1b31dbc6d01e83f443f22aef4e092b"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/sources.py",
+      "sha256": "aff5d7ab6bd4a6b02c55636072334dcc0e8fb0e83722bea4e5f5153e59f61185"
+    },
+    {
+      "path": "domain_ckg_workspace/ckg_incremental/store.py",
+      "sha256": "3bda6fdf72b09c949e41f9f28c647e11e96938fd2daa44a066d1d07f8cbcb8d9"
+    },
+    {
+      "path": "domain_ckg_workspace/config/concept_kg_incremental.yaml",
+      "sha256": "cbd055868292c261396e4c79d170e3e098c2feef7469739d5adbf645aa94d059"
+    },
+    {
+      "path": "dual_kg/__init__.py",
+      "sha256": "962cc5f5cdc56e690b7d4d1ae4a2dac4f606447800b9dbe222fdfc39ca8b3819"
+    },
+    {
+      "path": "dual_kg/__main__.py",
+      "sha256": "939323a4094cc2545578fb4d3e56e4a070202fd39d61c59f834994c43ab6b2cd"
+    },
+    {
+      "path": "dual_kg/api.py",
+      "sha256": "8c7617c47630106a2f512ee212ff8d60ff2310ba45c7f3610c1e3e542da90c57"
+    },
+    {
+      "path": "dual_kg/http.py",
+      "sha256": "a86349fc0d86e457747a23f436bb6b374af9d2789a7bc468b180da03f1ec153d"
+    },
+    {
+      "path": "dual_kg/resources/config/incremental.example.yaml",
+      "sha256": "cbd055868292c261396e4c79d170e3e098c2feef7469739d5adbf645aa94d059"
+    },
+    {
+      "path": "dual_kg/resources/config/schema.yaml",
+      "sha256": "c785d699bcea42f98ebb7193bf4821e54aa79a268fb298dd3ff2a40d1956c82c"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/00_教材共同_system.txt",
+      "sha256": "956a1c7bc5bb5620ed6815eabd1771bb604945815995f0ac9f264bb53cd04693"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/01_G0生成_system.txt",
+      "sha256": "0e23b100556fa564f2eddda5d70b449b9a3b6a1e319028170f245a4bc15f96da"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/01_G0生成_user.txt",
+      "sha256": "564f091fa2c5bcf981aa994e71bc2f77ffb6e648747ccac6fbd8764c13361b15"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/02_片段概念识别_system.txt",
+      "sha256": "523fef2ebd2f60f65031754dec36831c86fca44cc63de88b54b3cf4a017db30f"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/02_片段概念识别_user.txt",
+      "sha256": "a668e02e1b6dc03ab8c59ad8f558f1e10c0bd6df9d378b6b35e52b59065cb755"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/03_批量概念身份判断_user.txt",
+      "sha256": "46f7b19732f7e49eecb1d4b1d5ba0e61502d8fe9c6ee1a95814d04b1b50bf11d"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/04_关系与图谱增量更新_user.txt",
+      "sha256": "be8d797e782925800151bfafc355a59e9433867200874927a4558e42ef8c7593"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/05_定向证据与冲突复核_user.txt",
+      "sha256": "e88f8989073fee9776b1c70e424342f3c484cb3325f0e9b362b593e6689df1fa"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/06_片段图谱抽取_system.txt",
+      "sha256": "ede1bb492023af03d6bf17bf887028e475c27902296f5315c4629dc2890b1202"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/06_片段图谱抽取_user.txt",
+      "sha256": "c4a93125e1c58c383cda1733f2b142f849fb113e575c96367d6b3865bc030036"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/07_同义概念判定_system.txt",
+      "sha256": "92c3689a372cd428c9919779adf3688c7f46122863d0db62ce5177d01751be13"
+    },
+    {
+      "path": "dual_kg/resources/prompts/incremental_v5/07_同义概念判定_user.txt",
+      "sha256": "1a802596d428878fa20f0a4427c4f04a421f8cbb762ad6ed50828c8d18836379"
+    },
+    {
+      "path": "legacy_text_graph_tools/audit_heading_ownership.py",
+      "sha256": "32ed1fff59d981d7dc8ff6e7385bc8a8faaecbf96bb8abcb4c728a9148807193"
+    },
+    {
+      "path": "legacy_text_graph_tools/audit_paragraph_boundaries.py",
+      "sha256": "2b96d6deb27b03681b77e6c74f6bf75f1894aea47332e7d5eed2322189c97c89"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_evidence_graphs.py",
+      "sha256": "b3155b132161a01f7892cc34b67ec5f62a42f650e2f2f43e4a7e9e9ff2e31f02"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_full_audit_report.py",
+      "sha256": "2850ae6ee467a215859c5fd37d8b2bd0ea276f5f01fb7725b728d15ffaf06f23"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_hierarchy_view.py",
+      "sha256": "038a502da844b440a62e36bfac7a27f11dfc20078ca45f83864db7647f9789ab"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_layout_ownership_v6.py",
+      "sha256": "45e80b1f35f7a6daeb2dd7f302aef13f8c7f7125a4d8a3f2c79cd19ba7705f39"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_pdf_paragraph_graphs.py",
+      "sha256": "910f451850402b0e3494d4ac913b1c86b1c3af7134ac9a7070e8b682329eed3f"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_physical_graphs.py",
+      "sha256": "7f917825704d35c71bdb3d831482aa75e9900465a176869efea7e8889d1e20b7"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_text_graphs.py",
+      "sha256": "4f4ea6168a6cef55f242edcc065d472d8121c97a80568ea79db892cae0cc1cdd"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_v3_report.py",
+      "sha256": "f8051709360fc45c798456435427988815ea93171f4d884d401ab17d2b99b6ea"
+    },
+    {
+      "path": "legacy_text_graph_tools/build_v6_review_sheets.py",
+      "sha256": "4f1ec1f6754a07a52d2a1a1eaa0090e2015e991ed288dd0281b3ab0357cfd79f"
+    },
+    {
+      "path": "legacy_text_graph_tools/compile_evidence_plan.py",
+      "sha256": "0d12867878b9e3ca8159858ca683a6097c9b975f0eb8a733840574656b4d428c"
+    },
+    {
+      "path": "legacy_text_graph_tools/evidence_repair.py",
+      "sha256": "0da89f66899cb25773a76d668f1e669be0115c07cc91c61b91a7a6ee5072df05"
+    },
+    {
+      "path": "legacy_text_graph_tools/export_full_paragraph_corpus.py",
+      "sha256": "f3eb6864f29106771dfdcf90bfffd98b8e5af8237eb61fc85565422bead454ba"
+    },
+    {
+      "path": "legacy_text_graph_tools/extract_pdf_line_geometry.py",
+      "sha256": "4ca7650b402c6b08644b556e747401d5965e238bd61af0fc4fcb553cac1e64b6"
+    },
+    {
+      "path": "legacy_text_graph_tools/paragraph_cleaning.py",
+      "sha256": "230a27c8a096ad1d6bc45253735154dc0104a5456b7b7a18c387e3de5bba4a07"
+    },
+    {
+      "path": "legacy_text_graph_tools/pdf_paragraph_rules.py",
+      "sha256": "f614a54c210c18e699a935260f6c940159c358f4644d7a499b1dac4ed18ba50d"
+    },
+    {
+      "path": "legacy_text_graph_tools/propose_pdf_boundaries.py",
+      "sha256": "56cf328a44106e043704003305f1e6fccf5a3316532b869a76190402e14483af"
+    },
+    {
+      "path": "legacy_text_graph_tools/publish_layout_ownership_v6.py",
+      "sha256": "93c1d496dbdf18208bf29fdbb6b6dc2c0c3e8ddb4f00cb3195391eaacd3ec814"
+    },
+    {
+      "path": "legacy_text_graph_tools/publish_pdf_paragraph_graphs.py",
+      "sha256": "1b78fd8d7e841c301620ccd3232be32482eff5e0cdb4c819e5652b9874a0128e"
+    },
+    {
+      "path": "legacy_text_graph_tools/publish_physical_graphs.py",
+      "sha256": "92b1c04fe05a195ff91171bf722502abe9bc5953b15721717eb5a29bc07e9ab0"
+    },
+    {
+      "path": "legacy_text_graph_tools/reconcile_heading_scopes.py",
+      "sha256": "ae2d4bee98d0d7e8a83c4e24ee9b3d22cdbe4a468915cb266d121eaa8eebc531"
+    },
+    {
+      "path": "legacy_text_graph_tools/reconcile_pdf_sources.py",
+      "sha256": "d9f5d9995760c50ce60c0afd86cd6eff3504071c198233a6685caf5c49b86038"
+    },
+    {
+      "path": "legacy_text_graph_tools/record_full_audit_visual_reviews.py",
+      "sha256": "688ef874a8d82d38aac70ddb3dd826621f11b9c12387d178d587f83e4d2397e9"
+    },
+    {
+      "path": "legacy_text_graph_tools/render_full_audit_evidence.py",
+      "sha256": "2d840fee411fb9a369dabb008afb7be9b6f2afce74d80ca884ef79e9db81202a"
+    },
+    {
+      "path": "legacy_text_graph_tools/serve_pdf_evidence.py",
+      "sha256": "006f05be2094fc1649360cc5fff36ebcd6ed753dbb7f75df9b6f6b49b9478a5c"
+    },
+    {
+      "path": "legacy_text_graph_tools/source_recovery.py",
+      "sha256": "3fec97d95e037785c9b6faaccd3612290070a75ff2e89a2e6a4333f033d979be"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_boundary_audit.py",
+      "sha256": "570187e2afaac5a8d21d92b4512fa1927a9e84fc53f6c8be98b3cf0b9273d163"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_clean_export.py",
+      "sha256": "b1a8ed8b1ccfdf6f82beb3e26353f7767d23321722488a1d5cee2ffd5a28e512"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_evidence_repair.py",
+      "sha256": "34be437daec2ea4f879c24b9776fa80f12bf8aec131d8fcb5d74a4d2b70bf645"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_heading_ownership_audit.py",
+      "sha256": "91ca487f5dc1ada178c29204dd0f27b3170f8830ddd48fd4b4fec18427730aaf"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_paragraph_cleaning.py",
+      "sha256": "48fba71a0342880ea26c7b7bfd22b150b789e312f445c4a67056a8fd49b43a92"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_pdf_page_attribution.py",
+      "sha256": "87797e998c5281e6b2773926b721ac42b3039a1e0aa6445ae6552c40d86e58d6"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_pdf_paragraph_rules.py",
+      "sha256": "a33533ccaaede240faa1498b5e2f9dc5d3b6ad8e17505b4522277b2a23a9e99e"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_physical_graphs.py",
+      "sha256": "a2593d1193fdf1bed6058b796f7dd3014e0e9c73efbb249080862bae7c6eceed"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_reconcile_heading_scopes.py",
+      "sha256": "50f442ee72ae5f103246760cd38d22e5fbde3df2492ab00bdb1ecb0ecb04345f"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_reconcile_pdf_sources.py",
+      "sha256": "22b0d903d4dd9e7af085156eaa87088b813c364a2bac0bcaaaf2d363323f27ef"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_source_recovery.py",
+      "sha256": "17e5001755751bd2c66e286cc87291621679d78753120f8c5115f1cf88470fcd"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_text_graph_assets.py",
+      "sha256": "d9b729ca5ee46e0d206568cd04953e68cbacc1cbf4c0f4661c5f186013e9b3ed"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_text_graphs.py",
+      "sha256": "682d145963ace23957819061beacba70e4d51c6c9d44991483f05f923fcbd71c"
+    },
+    {
+      "path": "legacy_text_graph_tools/test_v6_cross_page.py",
+      "sha256": "d073b2075b91c891eed6dc275af326cb5ac89bae6ea197ccc72062b832fc18d9"
+    },
+    {
+      "path": "legacy_text_graph_tools/text_graph_assets.py",
+      "sha256": "4bc4150278d1dc86c0318b156b04da5bcfd84a831960e5014c45ce8781e1b3a6"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_evidence_graphs.py",
+      "sha256": "fd8c52ff8bb6da84168b01168a0b1559603d556487b390026ef090aa17ff468e"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_full_corpus_audit.py",
+      "sha256": "7a28c395a134e55ee55ac9c3399271f8a0347edfc9f87188f43be46017f0cadf"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_hierarchy_view.py",
+      "sha256": "899a46b737f30d34c211bd452658cf402a11cc59918e42c72213c4a94d1e02ff"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_layout_ownership_v6.py",
+      "sha256": "8bd25fc3e9092a90d0e750c28f57bdf4f9e25db96c90f276c304413fe0f6234f"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_pdf_paragraph_graphs.py",
+      "sha256": "2d68aa64831fb4ab8a7b0e118eb0f4f7e4318c9c83fcf0f292adc41e6598c542"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_physical_graphs.py",
+      "sha256": "3e9e9eedfea0a4fde8ac51407c72ef1049c72f5b27d13341998c03a049e4a44f"
+    },
+    {
+      "path": "legacy_text_graph_tools/verify_text_graphs.py",
+      "sha256": "2eb1bddc63516e0d404c43671786cf864624c4e98fd31694b95dace685cd76c2"
+    },
+    {
+      "path": "prompts/incremental_v5/00_教材共同_system.txt",
+      "sha256": "956a1c7bc5bb5620ed6815eabd1771bb604945815995f0ac9f264bb53cd04693"
+    },
+    {
+      "path": "prompts/incremental_v5/01_G0生成_system.txt",
+      "sha256": "0e23b100556fa564f2eddda5d70b449b9a3b6a1e319028170f245a4bc15f96da"
+    },
+    {
+      "path": "prompts/incremental_v5/01_G0生成_user.txt",
+      "sha256": "564f091fa2c5bcf981aa994e71bc2f77ffb6e648747ccac6fbd8764c13361b15"
+    },
+    {
+      "path": "prompts/incremental_v5/02_片段概念识别_system.txt",
+      "sha256": "523fef2ebd2f60f65031754dec36831c86fca44cc63de88b54b3cf4a017db30f"
+    },
+    {
+      "path": "prompts/incremental_v5/02_片段概念识别_user.txt",
+      "sha256": "a668e02e1b6dc03ab8c59ad8f558f1e10c0bd6df9d378b6b35e52b59065cb755"
+    },
+    {
+      "path": "prompts/incremental_v5/03_批量概念身份判断_user.txt",
+      "sha256": "46f7b19732f7e49eecb1d4b1d5ba0e61502d8fe9c6ee1a95814d04b1b50bf11d"
+    },
+    {
+      "path": "prompts/incremental_v5/04_关系与图谱增量更新_user.txt",
+      "sha256": "be8d797e782925800151bfafc355a59e9433867200874927a4558e42ef8c7593"
+    },
+    {
+      "path": "prompts/incremental_v5/05_定向证据与冲突复核_user.txt",
+      "sha256": "e88f8989073fee9776b1c70e424342f3c484cb3325f0e9b362b593e6689df1fa"
+    },
+    {
+      "path": "prompts/incremental_v5/06_片段图谱抽取_system.txt",
+      "sha256": "ede1bb492023af03d6bf17bf887028e475c27902296f5315c4629dc2890b1202"
+    },
+    {
+      "path": "prompts/incremental_v5/06_片段图谱抽取_user.txt",
+      "sha256": "c4a93125e1c58c383cda1733f2b142f849fb113e575c96367d6b3865bc030036"
+    },
+    {
+      "path": "prompts/incremental_v5/07_同义概念判定_system.txt",
+      "sha256": "92c3689a372cd428c9919779adf3688c7f46122863d0db62ce5177d01751be13"
+    },
+    {
+      "path": "prompts/incremental_v5/07_同义概念判定_user.txt",
+      "sha256": "1a802596d428878fa20f0a4427c4f04a421f8cbb762ad6ed50828c8d18836379"
+    }
+  ]
+}

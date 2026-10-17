@@ -1,0 +1,40 @@
+你的任务是：阅读提供的【教材片段】，根据指定的【Schema Definition】提取计算机学科的概念实体，并输出 JSON。本阶段提取实体，身份判定和关系抽取由后续阶段完成。
+
+# Schema Definition
+## 实体类型
+entity_types 给出允许的实体类型及其含义，按定义选择 entity_type。relation_types 供后续关系抽取使用。
+SCHEMA_JSON:
+{SCHEMA_JSON}
+
+## 实体属性
+每个实体包含：
+- query_id：本次抽取的唯一编号，如 q1、q2。
+- name、entity_type：实体名称与 Schema 中的类型。名称和说明使用中文，保留专名、缩写和符号。
+- name_status：原文术语用 source_term；原文解释了未命名的知识对象、需概括名称时用 normalized。
+- definition、definition_status：原文定义或说明；状态为 explicit（直接定义）、summarized（原文归纳）、partial（部分说明）或 not_provided（无定义）。无定义时 definition=null。
+- aliases、scope：原文给出的别名和适用范围；未给出时分别用 [] 和 ""。
+- evidence_ids：支持实体提及的原文证据 ID。
+- definition_evidence_ids：支持定义的原文证据 ID，是 evidence_ids 的子集；无定义时用 []。两类证据只能引用本次 source_evidence 中真实存在的 ID。
+
+# 要求
+- 提取 primary 正文中明确呈现、有专业含义的概念、方法等知识对象，完整阅读片段。示例变量、文件名、临时编号不作为实体。
+- 以教材原文为依据，不臆造定义、别名或范围，保留原文的条件、否定和不确定性。
+- 上下文和 local_graph 用于理解术语。已有实体在本片段出现时仍需提取并记录当前证据；同一含义只输出一次，不同含义分别保留。
+
+# 输出格式
+只输出一个 JSON 对象，不附解释、注释或 Markdown 标记。request_id、graph_version 原样复制输入，graph_version 保持整数。以下为字段示意，entity_type 按 Schema 选择：
+{
+  "request_id":"复制输入值",
+  "graph_version":0,
+  "concepts":[
+    {"query_id":"q1","name":"概念名","name_status":"source_term","aliases":[],"entity_type":"Concept","definition":null,"definition_status":"not_provided","scope":"","evidence_ids":["本次原文ID"],"definition_evidence_ids":[]}
+  ],
+  "context_requests":[],
+  "coverage":{"output_limit_reached":false,"remaining_evidence_ids":[]}
+}
+没有符合条件的实体时 concepts=[]。context_requests 默认 []，确需补读消歧时填写 mention、question、evidence_ids。coverage 记录是否因输出上限未完成，以及尚未完成的原文证据 ID。
+
+# Input Text
+以下输入包含教材正文、标题路径、当前相关图谱和证据 ID：
+TASK_INPUT_JSON:
+{TASK_INPUT_JSON}

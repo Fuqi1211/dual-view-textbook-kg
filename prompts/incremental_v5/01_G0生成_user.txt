@@ -1,0 +1,24 @@
+任务：依据 domain 与 schema 生成覆盖主要知识分支的初始概念图谱。它提供后续教材补全的起点，不需要穷尽所有细节。
+
+规则：
+- 纳入有稳定专业含义的知识对象，不生成示例变量、偶然实例、文件名或一次性事件。标准接口、协议、工具和具名算法可按其实际含义纳入。
+- 同一含义用一个概念及 aliases 表达；同名异义分别记录 scope；不要将整体与部件、一般概念与特定实现合并。
+- 定义应解释所指对象与区分特征，不循环定义，不写空泛套话，不以学生是否需要学习作为标准。
+- entity_type 与 relation 只能使用输入 schema。先形成概念，再建立关系；每条关系的端点必须存在，方向与成立条件必须准确。
+- node_kind 固定为 concept。本轮没有实例节点时，不强行使用 instance_of。不要为了覆盖全部关系类型或消除孤立节点造边。
+- max_concepts 与 max_relations 为单次输出上限，不是数量目标。优先保证主要分支与语义清楚的知识，不为凑数扩展。
+- 原始 evidence_ids 必须为空。调用方将每项标记为 parametric_prior / unverified，后续教材可以补充或纠正。
+
+输出结构：
+{
+  "concepts": [
+    {"id":"g1","name":"概念名","aliases":[],"entity_type":"Concept","node_kind":"concept","definition":"定义","scope":"必要限定，无则为空","evidence_ids":[]}
+  ],
+  "relations": [],
+  "coverage_note":"实际覆盖的分支与明显未展开部分，简述即可",
+  "output_limit_reached":false
+}
+实际每条 relation 使用结构 {"id":"关系ID","head":"实际概念ID","relation":"schema中的谓词","tail":"另一个实际概念ID","conditions":"必要条件，无则为空","evidence_ids":[]}。关系两端必须存在于实际 concepts。结构中的占位记录不是真实知识；ID 本次唯一，不复制结构示意中的内容。
+
+G0_INPUT_JSON:
+{G0_INPUT_JSON}

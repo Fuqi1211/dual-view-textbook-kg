@@ -1,0 +1,32 @@
+任务：对 queries 中每个教材概念，与其 candidates 一次比较，决定复用已有规范概念、提出新增，或明确还需补读的内容。每个 query_id 恰好返回一项。unresolved 是触发自动补读与再判断的中间状态，不能把输出这一标签当成处理完成。
+
+判断顺序：
+1. 从该 query 的原文和概念描述确定所指对象。综合定义、范围、作用及有依据的上下文比较候选。名称相同、向量相似、同一课程、共同上位类别都不能单独证明同一；不同课程也不自动表示不同。
+2. 区分同一概念与上下位、组成、实例、实现及一般相关关系。这些关系不能作为复用同一 ID 的理由。
+3. 定义为空或不完整时，允许利用明确的原文指代和解释判断身份；不得补造缺失定义。信息不足则 unresolved。
+4. 候选的某项属性可能错误。若独立于该错误属性的线索足以确定相同所指，可以 reuse，并将需核查的已有 claim_id 放入 review_claim_ids；不能把属性矛盾直接当作不同概念。若所指本身仍有歧义，输出 unresolved。
+
+结果约束：
+- reuse：含义相同、范围相容，canonical_id 必须来自该 query 的候选或调用方提供的规范 ID 映射。不得引用其他 query 的候选。
+- new：原文支持独立概念，给定候选均不匹配，而且 recall_status=completed。这里只提出新增，不宣称已经证明全图不存在重复；统一提交前还会查近期新增。
+- unresolved：召回失败或截断、语义不清、多个现有 ID 都匹配但没有明确规范映射，或其他无法消除的身份歧义。
+- 同一 query 有多个等价候选时，只在 canonical_map 明确提供规范映射时选取对应 ID；否则标记 duplicate_existing_candidates，不随机挑选或自行合并旧节点。
+- 本批 query 之间不相互充当身份依据，不输出传递合并或连通分量。各 new 提案的去重由提交环节继续处理。
+- 身份判断只决定是否同一，不将候选关系作为新教材事实写入图谱。引用仅使用该 query 输入的 evidence 中实际提供文本的 ID。
+
+简例：两个课程都明确描述同一先进后出数据结构，可以 reuse；“页”的候选分别表示内存管理单位和数据库存储单位时，应按原文选择；含义仍不清楚时 unresolved。上述例子不是实际待判定的知识。
+
+输出：
+{
+  "request_id":"原输入 request_id",
+  "graph_version":"原输入 graph_version",
+  "results":[
+    {"query_id":"原query_id","decision":"reuse","canonical_id":"该query候选中的规范ID","reason_code":"same_meaning","reason":"一句判断依据","evidence_ids":["该query允许的原文ID"],"candidate_ids_involved":[],"review_claim_ids":[],"needed_context":""}
+  ]
+}
+decision 仅为 reuse、new、unresolved。new 与 unresolved 的 canonical_id 必须为 null。
+reason_code 为 same_meaning、distinct_meaning、insufficient_context、incomplete_recall、duplicate_existing_candidates、conflicting_identity_evidence 之一。
+candidate_ids_involved 用于标出需要一同处理的候选；review_claim_ids 只能引用实际输入的断言 ID。unresolved 时 needed_context 必须具体指出需补读的定义、相邻解释或需统一的已有 ID，调用方完成后重新判定。不要凭空生成新 ID，不写概率评分或长篇解释。
+
+TASK_INPUT_JSON:
+{TASK_INPUT_JSON}
